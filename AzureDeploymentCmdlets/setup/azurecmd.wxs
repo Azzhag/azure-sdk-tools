@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+  <?define productName="Windows Azure PowerShell for Node.js - November 2011" ?>
+  <?define sourcedir="$(var.SolutionDir)..\src\AzureDeploymentCmdlets\bin\$(var.Configuration)\" ?>
+
+  <?define version="0.5" ?>
+  <?define azureSdkVersion="1.6" ?>
+  <?define versionedFolder="Nov2011" ?>
+  <?define versionedStartMenuFolder="Windows Azure SDK for Node.js - November 2011" ?>  
+
+  <Product Id="86e95da8-558b-44ac-8ef2-d9fa2ad4b130" 
+           Name="$(var.productName)" 
+           Language="1033" 
+           Version="$(var.version)" 
+           Manufacturer="Microsoft Corporation"            
+           UpgradeCode="27c3f68d-7251-4d25-8e47-30df1bcfafe7">
+
+    <Package InstallerVersion="200" Compressed="yes" Platform="x86" />
+    
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+
+    <Icon Id="icon.ico" SourceFile="media\WAIcon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <Property Id="NODEEXE">
+      <DirectorySearch Id="NodeDir" Path="[ProgramFilesFolder]nodejs">
+        <FileSearch Name="node.exe" />
+      </DirectorySearch>
+    </Property>
+
+    <Property Id="IISNODE">
+      <DirectorySearch Id="IISNodeDir" Path="[ProgramFilesFolder]iisnode">
+        <FileSearch Name="iisnode.dll" />
+      </DirectorySearch>
+    </Property>
+
+    <Property Id="AZURESDK">
+      <RegistrySearch Id="AZURESDK" Root="HKLM" Key="SOFTWARE\Microsoft\Microsoft SDKs\ServiceHosting\v$(var.azureSdkVersion)" Name="FullVersion" Type="raw" />
+    </Property>
+
+    <Property Id="POWERSHELLVERSION">
+      <RegistrySearch Id="POWERSHELLVERSION" Root="HKLM" Key="SOFTWARE\Microsoft\PowerShell\1\PowerShellEngine" Name="PowerShellVersion" Type="raw" />
+    </Property>
+    
+    <Condition Message="The node.exe is not found at [ProgramFilesFolder]nodejs. Please run the latest node.js installer, then restart this installer.">
+      <![CDATA[Installed OR NODEEXE]]>
+    </Condition>
+
+    <Condition Message="IIS Node must be installed before Windows Azure PowerShell for Node.js installation.">
+      <![CDATA[Installed or IISNODE]]>
+    </Condition>
+
+    <Condition Message="Windows Azure SDK $(var.azureSdkVersion) must be installed before Windows Azure PowerShell for Node.js  installation.">
+      <![CDATA[Installed or AZURESDK]]>
+    </Condition>
+                                             
+    <Condition Message="PowerShell 2.0 must be installed before Windows Azure PowerShell for Node.js installation.">
+      <![CDATA[Installed or (POWERSHELLVERSION = "2.0")]]>
+    </Condition>
+
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MicrosoftSdkFolder" Name = "Microsoft SDKs">
+          <Directory Id="AzureSdkFolder" Name = "Windows Azure">
+            <Directory Id="NodejsFolder" Name = "Nodejs">
+              <Directory Id="VersionedFolder" Name = "$(var.versionedFolder)">
+                  <Directory Id="PowerShellFolder" Name = "PowerShell"/>
+                  <Directory Id="ModulesFolder" Name = "modules"/>
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>          
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="AzureSdkNodejsFolder" Name="$(var.versionedStartMenuFolder)"/>
+      </Directory>
+    </Directory>
+    
+    <DirectoryRef Id="AzureSdkNodejsFolder">
+      <Component Id="AzureSdkNodejsShortcut" Guid="2BF9D830-E540-4BAC-A5D0-3E39AFDECDC5">
+        <Shortcut Id="AzureSdkNodejsStartMenuShortcut"
+                  Name="Windows Azure PowerShell for Node.js"
+                  Description="Windows PowerShell commandlets for deploying Node.js applications to Windows Azure"
+                  Target="[SystemFolder]\WindowsPowerShell\v1.0\powershell.exe"
+                  Arguments="-NoExit -Command &quot;cd c:\; Import-Module '[#filC06AD0EE9E0F411A6B55820A573E8F13]'&quot;"
+                  />
+        <File Id="GettingStartedLnk" KeyPath="no" Source="media\GettingStarted.url" />
+        <RemoveFolder Id="AzureSdkNodejsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="SOFTWARE\Microsoft\Microsoft SDKs\WindowsAzureNodejs\$(var.version)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="azurecmdnodejs" Title="Windows Azure PowerShell for Node.js" Level="1" Description="Windows PowerShell commandlets for deploying Node.js applications to Windows Azure">
+      <ComponentGroupRef Id="azurecmdfiles" />      
+      <ComponentRef Id="AzureSdkNodejsShortcut" />
+      <ComponentGroupRef Id="Product.Generated" />
+    </Feature>
+
+    <WixVariable Id="WixUILicenseRtf" Value="$(var.ProjectDir)\media\License.rtf" />
+    <UIRef Id="WixUI_Minimal" />
+   
+  </Product>
+
+  <?include azurecmdfiles.wxi ?>
+  
+</Wix>

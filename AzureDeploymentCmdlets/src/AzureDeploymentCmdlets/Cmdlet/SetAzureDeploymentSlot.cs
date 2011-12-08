@@ -1,0 +1,53 @@
+﻿// ----------------------------------------------------------------------------------
+// 
+// 
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// 
+// THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+// EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES 
+// OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// ----------------------------------------------------------------------------------
+// The example companies, organizations, products, domain names,
+// e-mail addresses, logos, people, places, and events depicted
+// herein are fictitious.  No association with any real company,
+// organization, product, domain name, email address, logo, person,
+// places, or events is intended or should be inferred.
+// ----------------------------------------------------------------------------------
+
+namespace AzureDeploymentCmdlets.Cmdlet
+{
+    using System;
+    using System.Management.Automation;
+    using AzureDeploymentCmdlets.Model;
+    using AzureDeploymentCmdlets.Properties;
+
+    /// <summary>
+    /// Configure the default slot for deploying. Stores the new slot value in settings.json
+    /// </summary>
+    [Cmdlet(VerbsCommon.Set, "AzureDeploymentSlot")]
+    public class SetAzureDeploymentSlotCommand : SetSettings
+    {
+        [Parameter(Position = 0, Mandatory = true)]
+        public string Slot { set; get; }
+
+        public void SetAzureDeploymentSlotProcess(string newSlot, string settingsPath)
+        {
+            ServiceSettings settings = ServiceSettings.Load(settingsPath);
+            settings.Slot = newSlot;
+            settings.Save(settingsPath);
+        }
+
+        protected override void ProcessRecord()
+        {
+            try
+            {
+                base.ProcessRecord();
+                this.SetAzureDeploymentSlotProcess(Slot, base.GetServiceSettingsPath(false));
+            }
+            catch (Exception ex)
+            {
+                SafeWriteError(new ErrorRecord(ex, string.Empty, ErrorCategory.CloseError, null));
+            }
+        }
+    }
+}

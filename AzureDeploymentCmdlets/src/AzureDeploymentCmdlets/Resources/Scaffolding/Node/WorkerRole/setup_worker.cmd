@@ -1,0 +1,1 @@
+icacls . /grant "Network Service":(OI)(CI)W
