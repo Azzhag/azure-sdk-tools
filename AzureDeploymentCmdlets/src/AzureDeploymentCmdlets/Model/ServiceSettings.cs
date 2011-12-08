@@ -187,10 +187,11 @@ namespace AzureDeploymentCmdlets.Model
             }
             // If none of previous succeed, use service name as storage account name
             //
-            else
+            else if (!String.IsNullOrEmpty(serviceName))
             {
-                return serviceName;
+                serviceName = serviceName.Replace("-", "x2d");
             }
+            return serviceName;
         }
 
         private static string GetDefaultSubscription(string localSubscription, string globalSubscription, string subscription)
