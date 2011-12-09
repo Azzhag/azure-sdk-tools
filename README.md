@@ -51,25 +51,31 @@ Node.js Developer Center</a>.</p>
 </ul>
 
 <h1>Getting Started</h1>
-<h2>Download Source Code</h2>
-<p>To get the source code of the SDK via git just type:<br/>
-<pre>git clone https://github.com/WindowsAzure/nodetools.git<br/>cd ./nodetools</pre>
-</p>
 <h2>Install Prerequisites</h2>
 <ul>
     <li><a href="http://nodejs.org/">Node.js</a></li>
     <li><a href="https://github.com/tjanczuk/iisnode">IISNode</a></li>
     <li><a href="http://www.microsoft.com/windowsazure/sdk/">Windows Azure SDK</a></li>
     <li><a href="http://technet.microsoft.com/en-us/scriptcenter/dd742419">Windows PowerShell 2.0</a></li>
+</ul>
+<h2>Download Binary</h2>
+<p>An installer is available on the <a href="https://github.com/WindowsAzure/azure-sdk-tools/downloads">Downloads tab</a>. If you choose the binary installer, you do not need to download source.</p>
+<h2>Download Source Code</h2>
+<p>If you would like to get the source code via git <strong>instead</strong> of the binary and build the tools yourself just type:<br/>
+<pre>git clone https://github.com/WindowsAzure/azure-sdk-tools.git<br/>cd ./azure-sdk-tools<br/>msbuild AzureDeploymentCmdlets/src/AzureDeploymentCmdlets.sln</pre>
+</p>
+<p>In order to build the project, you will need to install the following additional prerequisites:</p>
+<ul>
+    <li>Visual Studio 2010</li>
     <li><a href="http://wix.sourceforge.net/">WiX</a> (Only needed if you want to build the setup project)</li>
 </ul>
-<h2>Configure PowerShell to automatically load commandlets</h2>
+<p>Configure PowerShell to automatically load the commandlets you build:</h2>
 <ol>
     <li>Create a folder inside your user's Documents folder and name it <strong>WindowsPowerShell</strong></li>
     <li>Inside that folder create a file called <strong>Microsoft.PowerShell_profile.ps1</strong></li>
     <li>Edit the file in a text editor and add the following contents<br/>
     <pre>Import-Module<br/>PATH_TO_NODETOOLS_CLONE\AzureDeploymentCmdlets\src\AzureDeploymentCmdlets\bin\Debug\AzureDeploymentCmdlets.dll</pre></li>
-    <li>After you build the commandlets project, you can then open a PowerShell window and you should be able to use the commandlets. Please note that if you want to rebuild the project, you have close the PowerShell window, and then reopen it.</li>
+    <li>After you build the commandlets project, you can then open a PowerShell window and you should be able to use the commandlets. Please note that if you want to rebuild the project, you have to close the PowerShell window, and then reopen it.</li>
 </ol>
 
 <h1>Usage</h1>
@@ -97,7 +103,7 @@ Node.js Developer Center</a>.</p>
 Developer Forums on Stack Overflow</a> if you have trouble with the provided code.</p>
 
 <h1>Feedback</h1>
-<p>For feedback related specificically to this SDK, please use the Issues
+<p>For feedback related specifically to this SDK, please use the Issues
 section of the repository.</p>
 <p>For general suggestions about Windows Azure please use our
 <a href="http://www.mygreatwindowsazureidea.com/forums/34192-windows-azure-feature-voting">UserVoice forum</a>.</p>
