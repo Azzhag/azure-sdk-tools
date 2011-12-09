@@ -59,7 +59,7 @@ Node.js Developer Center</a>.</p>
     <li><a href="http://technet.microsoft.com/en-us/scriptcenter/dd742419">Windows PowerShell 2.0</a></li>
 </ul>
 <h2>Download Binary</h2>
-<p>An installer is available on the Downloads tab. If you choose the binary installer, you do not need to download source.</p>
+<p>An installer is available on the <a href="https://github.com/WindowsAzure/azure-sdk-tools/downloads">Downloads tab</a>. If you choose the binary installer, you do not need to download source.</p>
 <h2>Download Source Code</h2>
 <p>If you would like to get the source code via git <strong>instead</strong> of the binary and build the tools yourself just type:<br/>
 <pre>git clone https://github.com/WindowsAzure/nodetools.git<br/>cd ./nodetools<br/>msbuild AzureDeploymentCmdlets/src/AzureDeploymentCmdlets.sln</pre>
