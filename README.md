@@ -62,7 +62,7 @@ Node.js Developer Center</a>.</p>
 <p>An installer is available on the <a href="https://github.com/WindowsAzure/azure-sdk-tools/downloads">Downloads tab</a>. If you choose the binary installer, you do not need to download source.</p>
 <h2>Download Source Code</h2>
 <p>If you would like to get the source code via git <strong>instead</strong> of the binary and build the tools yourself just type:<br/>
-<pre>git clone https://github.com/WindowsAzure/nodetools.git<br/>cd ./nodetools<br/>msbuild AzureDeploymentCmdlets/src/AzureDeploymentCmdlets.sln</pre>
+<pre>git clone https://github.com/WindowsAzure/azure-sdk-tools.git<br/>cd ./azure-sdk-tools<br/>msbuild AzureDeploymentCmdlets/src/AzureDeploymentCmdlets.sln</pre>
 </p>
 <p>In order to build the project, you will need to install the following additional prerequisites:</p>
 <ul>
