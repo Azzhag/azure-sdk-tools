@@ -53,7 +53,7 @@ Node.js Developer Center</a>.</p>
 <h1>Getting Started</h1>
 <h2>Download Source Code</h2>
 <p>To get the source code of the SDK via git just type:<br/>
-<pre>git clone https://github.com/WindowsAzure/nodetools.git<br/>cd ./nodetools</pre>
+<pre>git clone https://github.com/WindowsAzure/azure-sdk-tools.git<br/>cd ./azure-sdk-tools</pre>
 </p>
 <h2>Install Prerequisites</h2>
 <ul>
@@ -68,7 +68,7 @@ Node.js Developer Center</a>.</p>
     <li>Create a folder inside your user's Documents folder and name it <strong>WindowsPowerShell</strong></li>
     <li>Inside that folder create a file called <strong>Microsoft.PowerShell_profile.ps1</strong></li>
     <li>Edit the file in a text editor and add the following contents<br/>
-    <pre>Import-Module<br/>PATH_TO_NODETOOLS_CLONE\AzureDeploymentCmdlets\src\AzureDeploymentCmdlets\bin\Debug\AzureDeploymentCmdlets.dll</pre></li>
+    <pre>Import-Module<br/>PATH_TO_AZURE-SDK-TOOLS_CLONE\AzureDeploymentCmdlets\src\AzureDeploymentCmdlets\bin\Debug\AzureDeploymentCmdlets.dll</pre></li>
     <li>After you build the commandlets project, you can then open a PowerShell window and you should be able to use the commandlets. Please note that if you want to rebuild the project, you have close the PowerShell window, and then reopen it.</li>
 </ol>
 
@@ -106,6 +106,4 @@ section of the repository.</p>
 <ul>
     <li><a href="http://www.windowsazure.com/en-us/develop/nodejs/">Windows Azure Node.js
     Developer Center</a></li>
-    <li><a href="http://waweb.cloudapp.net/en-us/nodejs/how-to-guides/blob-storage">
-    Windows Azure Reference for Node.js (MSDN)</a></li>
 </ul>
