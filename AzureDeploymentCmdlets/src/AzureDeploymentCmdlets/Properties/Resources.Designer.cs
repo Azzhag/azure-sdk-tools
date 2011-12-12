@@ -305,6 +305,16 @@ namespace AzureDeploymentCmdlets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An unexpected failure occurred.  Details:
+        ///{0}.
+        /// </summary>
+        internal static string CsRun_StartCsRunProcess_UnexpectedFailure {
+            get {
+                return ResourceManager.GetString("CsRun_StartCsRunProcess_UnexpectedFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to csrun.exe.
         /// </summary>
         internal static string CsRunExe {
