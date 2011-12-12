@@ -216,5 +216,30 @@ namespace AzureDeploymentCmdlets.Utilities
             store.Open(OpenFlags.ReadWrite);
             store.Remove(certificate);
         }
+
+        /// <summary>
+        /// Append an element to the end of an array.
+        /// </summary>
+        /// <typeparam name="T">Type of the arrays.</typeparam>
+        /// <param name="left">The left array.</param>
+        /// <param name="right">The right array.</param>
+        /// <returns>The concatenated arrays.</returns>
+        public static T[] Append<T>(T[] left, T right)
+        {
+            if (left == null)
+            {
+                return right != null ?
+                    new T[] { right } :
+                    new T[] { };
+            }
+            else if (right == null)
+            {
+                return left;
+            }
+            else
+            {
+                return Enumerable.Concat(left, new T[] { right }).ToArray();
+            }
+        }
     }
 }

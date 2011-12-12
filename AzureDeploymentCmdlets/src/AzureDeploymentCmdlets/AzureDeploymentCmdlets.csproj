@@ -138,7 +138,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="AzureTools\AzureTool.cs" />
+    <Compile Include="AzureTools\CsEncrypt.cs" />
     <Compile Include="AzureTools\CsPack.cs" />
+    <Compile Include="Cmdlet\EnableAzureRemoteDesktop.cs" />
     <Compile Include="Cmdlet\GetAzurePublishSettings.cs" />
     <Compile Include="Cmdlet\GetAzureStorageAccounts.cs" />
     <Compile Include="Model\AzureServiceManagementException.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Scaffolding\Scaffold.cs" />
     <Compile Include="Scaffolding\ScaffoldFile.cs" />
     <Compile Include="Scaffolding\ScaffoldParams.cs" />
+    <Compile Include="Services\Certificates.cs" />
     <Compile Include="Services\CloudCmdlet.cs" />
     <Compile Include="Cmdlet\NewAzureService.cs" />
     <Compile Include="Services\ServiceManagementCmdletBase.cs" />

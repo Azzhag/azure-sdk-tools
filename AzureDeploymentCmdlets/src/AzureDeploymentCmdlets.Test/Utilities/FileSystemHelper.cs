@@ -48,9 +48,15 @@ namespace AzureDeploymentCmdlets.Test
         public TestBase TestInstance { get; private set; }
 
         /// <summary>
-        /// 
+        /// Monitors changes to the file system.
         /// </summary>
         private FileSystemWatcher _watcher = null;
+
+        /// <summary>
+        /// The previous Environment.CurrentDirectory which is cached so it can
+        /// be restored on disposal.
+        /// </summary>
+        private string _previousDirectory = null;
 
         /// <summary>
         /// Gets or sets a value indicating whether to enable monitoring on
@@ -130,6 +136,12 @@ namespace AzureDeploymentCmdlets.Test
                         .RemovePublishSettingsProcess(AzureSdkPath);
                     GlobalPathInfo.GlobalSettingsDirectory = null;
                     AzureSdkPath = null;
+                }
+
+                // Restore the previous CurrentDirectory
+                if (_previousDirectory != null)
+                {
+                    Environment.CurrentDirectory = _previousDirectory;
                 }
 
                 Log("Deleting directory {0}", RootPath);
@@ -274,6 +286,24 @@ namespace AzureDeploymentCmdlets.Test
             GlobalPathInfo.GlobalSettingsDirectory = AzureSdkPath;
 
             return AzureSdkPath;
+        }
+
+        /// <summary>
+        /// Create a new service with a given name and make that the current
+        /// directory used by cmdlets.
+        /// </summary>
+        /// <param name="serviceName">Name of the service.</param>
+        /// <returns>Directory created for the service.</returns>
+        public string CreateNewService(string serviceName)
+        {
+            new NewAzureServiceCommand()
+                .NewAzureServiceProcess(RootPath, serviceName);
+
+            string path = Path.Combine(RootPath, serviceName);
+            _previousDirectory = Environment.CurrentDirectory;
+            Environment.CurrentDirectory = path;
+
+            return path;
         }
     }
 }

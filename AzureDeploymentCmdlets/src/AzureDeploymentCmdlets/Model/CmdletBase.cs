@@ -23,7 +23,14 @@ namespace AzureDeploymentCmdlets.Model
 
         protected string GetServiceRootPath() { return PathUtility.FindServiceRootDirectory(CurrentPath()); }
 
-        protected string CurrentPath() { return SessionState.Path.CurrentLocation.Path; }
+        protected string CurrentPath()
+        {
+            // SessionState is only available within Powershell so default to
+            // the CurrentDirectory when being run from tests.
+            return (SessionState != null) ?
+                SessionState.Path.CurrentLocation.Path :
+                Environment.CurrentDirectory;
+        }
 
         public string ResolvePath(string path)
         {

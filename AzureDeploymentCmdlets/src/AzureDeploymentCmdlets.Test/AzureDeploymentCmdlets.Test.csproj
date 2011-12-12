@@ -140,6 +140,7 @@
     <Compile Include="Tests\AzureTools\CsPackTests.cs" />
     <Compile Include="Tests\AzureTools\CsRunTests.cs" />
     <Compile Include="Tests\Cmdlet\CmdletBaseTests.cs" />
+    <Compile Include="Tests\Cmdlet\EnableAzureRemoteDesktopCommandTest.cs" />
     <Compile Include="Tests\Cmdlet\GetAzurePublishSettingsTests.cs" />
     <Compile Include="Tests\Cmdlet\GetAzureStorageAccountsTests.cs" />
     <Compile Include="Tests\Cmdlet\NewAzureServiceTests.cs" />
