@@ -110,8 +110,16 @@ namespace AzureDeploymentCmdlets.AzureTools
         {
             ProcessStartInfo pi = new ProcessStartInfo(csrunPath, arguments);
             ProcessHelper.StartAndWaitForProcess(pi, out standardOutput, out standardError);
+            
+            // If there's an error from the CsRun tool, we want to display that
+            // error message.
+            if (!string.IsNullOrEmpty(standardError))
+            {
+                throw new InvalidOperationException(
+                    string.Format(Resources.CsRun_StartCsRunProcess_UnexpectedFailure, standardError));
+            }
         }
-
+        
         private int GetDeploymentCount(string text)
         {
             Regex deploymentRegex = new Regex("deployment16\\((\\d+)\\)", RegexOptions.Multiline);

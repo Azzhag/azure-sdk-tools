@@ -589,6 +589,9 @@
   <data name="PublishCreatedWebsiteLaunchNotSupportedMessage" xml:space="preserve">
     <value>Created Website. Please use the Azure Portal at http://windows.azure.com to find the deployment URL.</value>
   </data>
+  <data name="CsRun_StartCsRunProcess_UnexpectedFailure" xml:space="preserve">
+    <value>An unexpected failure occurred.  Details:
+{0}</value>
   <data name="CsEncryptCreateCertificateArg" xml:space="preserve">
     <value>New-PasswordEncryptionCertificate -FriendlyName "Windows Azure Node Certificate"</value>
   </data>
