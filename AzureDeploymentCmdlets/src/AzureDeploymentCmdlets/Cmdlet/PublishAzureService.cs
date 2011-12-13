@@ -18,6 +18,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
+using System.Security.Cryptography.X509Certificates;
 using System.Security.Permissions;
 using System.ServiceModel;
 using System.Threading;
@@ -159,11 +160,9 @@ namespace AzureDeploymentCmdlets.Cmdlet
                 CreateHostedService();
                 CreateNewDeployment();
             }
-
-            // Remove package after creating the deployment
-            RemovePackage();
-
-            // Verify the deployment succeeded by checking that each of the roles are running
+            
+            // Verify the deployment succeeded by checking that each of the
+            // roles are running
             VerifyDeployment();
 
             // After we've finished deploying, optionally launch a browser pointed at the service
@@ -496,6 +495,9 @@ namespace AzureDeploymentCmdlets.Cmdlet
 
             InvokeInOperationContext(() =>
                 {
+
+                    AddCertificates();
+
                     RetryCall(subscription =>
                         Channel.CreateOrUpdateDeployment(
                             subscription,
@@ -540,6 +542,9 @@ namespace AzureDeploymentCmdlets.Cmdlet
                         deploymentInput));
                 WaitForDeploymentToStart();
             });
+
+                    AddCertificates();
+
         }
 
         /// <summary>
@@ -683,7 +688,25 @@ namespace AzureDeploymentCmdlets.Cmdlet
                         _deploymentSettings.ServiceSettings.Slot));
             }
         }
-
+        
+        private void AddCertificates()
+        {
+            if (_azureService.Components.CloudConfig.Role != null)
+            {
+                foreach (ServiceConfigurationSchema.Certificate certElement in _azureService.Components.CloudConfig.Role.SelectMany(r => r.Certificates).Distinct())
+                {
+                    X509Certificate2 cert = General.GetCertificateFromStore(certElement.thumbprint);
+                    CertificateFile certFile = new CertificateFile
+                    {
+                        Data = Convert.ToBase64String(cert.Export(X509ContentType.Pfx, string.Empty)),
+                        Password = string.Empty,
+                        CertificateFormat = "pfx"
+                    };
+                    RetryCall(subscription => Channel.AddCertificates(subscription, _hostedServiceName, certFile));
+                }
+            }
+        }
+        
         /// <summary>
         /// Launch a browser pointed at the service after deploying.
         /// </summary>
