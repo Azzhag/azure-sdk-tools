@@ -278,6 +278,33 @@ namespace AzureDeploymentCmdlets.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CsEncrypt.exe failed to generate a certificate ({0}).
+        /// </summary>
+        internal static string CsEncrypt_CreateCertificate_CreationFailed {
+            get {
+                return ResourceManager.GetString("CsEncrypt_CreateCertificate_CreationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New-PasswordEncryptionCertificate -FriendlyName &quot;Windows Azure Node Certificate&quot;.
+        /// </summary>
+        internal static string CsEncryptCreateCertificateArg {
+            get {
+                return ResourceManager.GetString("CsEncryptCreateCertificateArg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to csencrypt.exe.
+        /// </summary>
+        internal static string CsEncryptExe {
+            get {
+                return ResourceManager.GetString("CsEncryptExe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;{0}\ServiceDefinition.csdef&quot; /out:&quot;{0}\cloud_package.cspkg&quot; {1} {2}.
         /// </summary>
         internal static string CsPackCloudArg {
@@ -455,6 +482,33 @@ namespace AzureDeploymentCmdlets.Properties {
         internal static string EmulatorRoleRunningMessage {
             get {
                 return ResourceManager.GetString("EmulatorRoleRunningMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot enable Remote Desktop because there are no roles.
+        /// </summary>
+        internal static string EnableAzureRemoteDesktop_Enable_NoRoles {
+            get {
+                return ResourceManager.GetString("EnableAzureRemoteDesktop_Enable_NoRoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password is not complex enough. The password should include at least three different kinds of characters (uppercase, lowercase, digits, and other symbols) and be at least six characters long..
+        /// </summary>
+        internal static string EnableAzureRemoteDesktopCommand_Enable_NeedComplexPassword {
+            get {
+                return ResourceManager.GetString("EnableAzureRemoteDesktopCommand_Enable_NeedComplexPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Azure Node Certificate.
+        /// </summary>
+        internal static string EnableRemoteDesktop_FriendlyCertificateName {
+            get {
+                return ResourceManager.GetString("EnableRemoteDesktop_FriendlyCertificateName", resourceCulture);
             }
         }
         

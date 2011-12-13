@@ -592,5 +592,22 @@
   <data name="CsRun_StartCsRunProcess_UnexpectedFailure" xml:space="preserve">
     <value>An unexpected failure occurred.  Details:
 {0}</value>
+  <data name="CsEncryptCreateCertificateArg" xml:space="preserve">
+    <value>New-PasswordEncryptionCertificate -FriendlyName "Windows Azure Node Certificate"</value>
+  </data>
+  <data name="CsEncryptExe" xml:space="preserve">
+    <value>csencrypt.exe</value>
+  </data>
+  <data name="CsEncrypt_CreateCertificate_CreationFailed" xml:space="preserve">
+    <value>CsEncrypt.exe failed to generate a certificate ({0})</value>
+  </data>
+  <data name="EnableAzureRemoteDesktopCommand_Enable_NeedComplexPassword" xml:space="preserve">
+    <value>Password is not complex enough. The password should include at least three different kinds of characters (uppercase, lowercase, digits, and other symbols) and be at least six characters long.</value>
+  </data>
+  <data name="EnableAzureRemoteDesktop_Enable_NoRoles" xml:space="preserve">
+    <value>Cannot enable Remote Desktop because there are no roles</value>
+  </data>
+  <data name="EnableRemoteDesktop_FriendlyCertificateName" xml:space="preserve">
+    <value>Windows Azure Node Certificate</value>
   </data>
 </root>
